@@ -151,3 +151,23 @@ body {
     50% { transform: rotate(90deg); }
     100% { transform: rotate(0deg); }
 }
+
+/* Mobile Optimization: Shrink the game on small screens */
+@media screen and (max-width: 900px) {
+    #gameWrapper {
+        transform: scale(0.6); /* Shrinks the game to 60% */
+        transform-origin: center center; /* Keeps it centered while shrinking */
+        padding: 0;
+        gap: 10px; /* Reduces space between columns to fit the screen */
+    }
+
+    /* Optional: Shrink buttons slightly more to make room */
+    .dpad-btn {
+        width: 50px !important;
+        height: 50px !important;
+    }
+    .bomb-btn {
+        width: 80px !important;
+        height: 80px !important;
+    }
+}
