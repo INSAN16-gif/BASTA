@@ -25,7 +25,7 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding-top: 230px; /* Aligns with middle content */
+    padding-top: 230px;
 }
 
 .dpad-cross {
@@ -43,7 +43,6 @@ body {
     width: 100px;
     height: 100px;
     margin: 5px;
-    font-size: 20px;
     font-size: 70px;
 }
 
@@ -72,7 +71,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-top: 280px; /* Aligns with map area */
+    padding-top: 280px;
 }
 
 .bomb-btn {
@@ -107,32 +106,63 @@ body {
 
 #statBossHp { width: 100px; display: inline-block; }
 
-
-
-
-/* Mobile Optimization: Shrink the map and wrapper for Android/Small Screens */
 @media screen and (max-width: 900px) {
-    /* 1. Scale the entire game container down further if needed */
+    body {
+        align-items: flex-start;
+        overflow-x: hidden;
+    }
+
     #gameWrapper {
-        transform: scale(0.5); /* Try 0.4 if it is still too big */
+        position: relative; /* This makes 'absolute' children anchor to the wrapper */
+        flex-direction: column !important;
+        transform: scale(0.65);
         transform-origin: top center;
-        margin-top: 10px;
+        padding-top: 30px;
+        width: 100%;
+        min-height: 800px; /* Give the wrapper enough space for controls */
+        display: flex;
+        align-items: center;
+        padding-bottom: 50px;
     }
 
-    /* 2. Force the canvas container to be smaller */
-    .canvas-container {
-        width: 400px;  /* Reduces the visible area of the map */
-        height: 300px;
-        overflow: hidden; /* Clips the overflow if the map is huge */
-    }
-
-    #gameCanvas {
-        width: 100%;  /* Makes the canvas fill the smaller container */
-        height: 100%;
-    }
-
-    /* 3. Adjust spacing to bring buttons closer to the smaller map */
     .game-main-content {
-        margin: 0 10px;
+        order: 1;
+        width: 100%;
+        margin-bottom: 20px;
     }
+
+   
+
+    /* Force the wrapper of these two to act as a row */
+    #gameWrapper {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    /* Create the horizontal container for mobile controls */
+    /* We use a flex-row on the wrapper's children */
+    #gameWrapper {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* This forces the two containers to sit in a horizontal row */
+    .left-controls {
+        position: absolute;
+        bottom: 0px;
+        left: 0%; /* D-pad left */
+        padding-top: 0 !important;
+    }
+
+    .right-controls {
+        position: absolute;
+        bottom: 0px;
+        right: 0%; /* Bomb button right */
+        padding-top: 0 !important;
+    }
+
+    /* Buttons sizing for mobile */
+    .dpad-btn { width: 70px !important; height: 70px !important; font-size: 40px !important; }
+    .bomb-btn { width: 130px !important; height: 130px !important; font-size: 60px !important; }
 }
