@@ -118,11 +118,11 @@ body {
         transform: scale(0.65);
         transform-origin: top center;
         padding-top: 30px;
-        width: 100%;
+        width: 130%;
         min-height: 800px; /* Give the wrapper enough space for controls */
         display: flex;
         align-items: center;
-        padding-bottom: 50px;
+        padding-bottom: 130px;
     }
 
     .game-main-content {
@@ -157,12 +157,12 @@ body {
 
     .right-controls {
         position: absolute;
-        bottom: 0px;
+        bottom: 80px;
         right: 0%; /* Bomb button right */
         padding-top: 0 !important;
     }
 
     /* Buttons sizing for mobile */
-    .dpad-btn { width: 70px !important; height: 70px !important; font-size: 40px !important; }
+    .dpad-btn { width: 100px !important; height: 100px !important; font-size: 40px !important; }
     .bomb-btn { width: 130px !important; height: 130px !important; font-size: 60px !important; }
 }
