@@ -152,22 +152,29 @@ body {
     100% { transform: rotate(0deg); }
 }
 
-/* Mobile Optimization: Shrink the game on small screens */
+/* Mobile Optimization: Shrink the map and wrapper for Android/Small Screens */
 @media screen and (max-width: 900px) {
+    /* 1. Scale the entire game container down further if needed */
     #gameWrapper {
-        transform: scale(0.6); /* Shrinks the game to 60% */
-        transform-origin: center center; /* Keeps it centered while shrinking */
-        padding: 0;
-        gap: 10px; /* Reduces space between columns to fit the screen */
+        transform: scale(0.5); /* Try 0.4 if it is still too big */
+        transform-origin: top center;
+        margin-top: 10px;
     }
 
-    /* Optional: Shrink buttons slightly more to make room */
-    .dpad-btn {
-        width: 50px !important;
-        height: 50px !important;
+    /* 2. Force the canvas container to be smaller */
+    .canvas-container {
+        width: 400px;  /* Reduces the visible area of the map */
+        height: 300px;
+        overflow: hidden; /* Clips the overflow if the map is huge */
     }
-    .bomb-btn {
-        width: 80px !important;
-        height: 80px !important;
+
+    #gameCanvas {
+        width: 100%;  /* Makes the canvas fill the smaller container */
+        height: 100%;
+    }
+
+    /* 3. Adjust spacing to bring buttons closer to the smaller map */
+    .game-main-content {
+        margin: 0 10px;
     }
 }
