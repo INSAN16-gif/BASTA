@@ -109,48 +109,6 @@ body {
 
 
 
-/* Hide overlay by default on desktop/landscape */
-#rotateOverlay {
-    display: none; 
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: #000;
-    z-index: 9999;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #39ff14;
-    font-family: monospace;
-    font-size: 24px;
-    text-align: center;
-}
-
-/* Only show on mobile devices in Portrait orientation */
-@media screen and (max-width: 900px) and (orientation: portrait) {
-    #rotateOverlay {
-        display: flex;
-    }
-    
-    /* Hide the actual game when in portrait */
-    #gameWrapper {
-        display: none !important;
-    }
-}
-
-.rotate-icon {
-    font-size: 50px;
-    margin-top: 20px;
-    animation: rotateAnim 2s infinite;
-}
-
-@keyframes rotateAnim {
-    0% { transform: rotate(0deg); }
-    50% { transform: rotate(90deg); }
-    100% { transform: rotate(0deg); }
-}
 
 /* Mobile Optimization: Shrink the map and wrapper for Android/Small Screens */
 @media screen and (max-width: 900px) {
