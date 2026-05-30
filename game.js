@@ -188,20 +188,20 @@ function getChromaKeyedFrame(sourceElement, width, height) {
 }
 
 const MAP_TEMPLATE = [
-    [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0], 
-    [2,1,2,1,0,0,0,1,1,1,0,1,0,0,0,1,0,0,0], 
-    [2,1,0,1,0,1,1,1,0,0,0,1,0,1,1,1,0,0,0], 
-    [2,1,0,1,0,0,0,1,0,1,1,1,0,0,0,1,0,0,0], 
-    [2,0,0,1,1,1,0,1,0,0,0,1,1,1,0,1,0,0,0], 
-    [2,1,0,1,0,0,0,1,1,1,0,1,0,0,0,1,0,0,0], 
-    [2,1,0,1,0,1,1,1,0,0,0,1,0,1,1,1,0,0,0], 
-    [2,1,0,1,0,0,0,1,0,1,1,1,0,0,0,1,0,0,0], 
-    [2,1,0,1,1,1,0,1,0,0,0,1,1,1,0,1,0,0,0], 
-    [0,0,0,1,0,0,0,1,1,1,0,1,0,0,0,1,0,0,0], 
-    [0,1,0,1,0,1,1,1,0,0,0,1,0,1,1,1,0,0,0], 
-    [0,1,0,1,0,0,0,1,0,1,1,1,0,0,0,1,0,0,0], 
-    [0,1,0,1,1,1,0,1,0,0,0,1,1,1,0,1,0,1,1], 
-    [0,0,0,0,0,0,0,1,1,1,0,0,0,0,0,1,0,3,4]  
+    [0,0,0,1,1,1,2,2,2,2,2,1,1,1,2,2,0,0,0], 
+    [0,1,2,1,0,0,0,1,1,1,2,1,0,0,0,1,0,0,0], 
+    [0,1,2,1,0,1,1,1,2,2,2,1,0,1,1,1,0,0,0], 
+    [0,1,2,1,0,0,0,1,2,1,1,1,0,0,0,1,0,0,0], 
+    [0,0,0,1,1,1,0,1,2,2,2,1,1,1,0,1,0,0,0], 
+    [0,1,0,1,0,0,0,1,1,1,2,1,0,0,0,1,0,0,0], 
+    [0,1,0,1,2,1,1,1,2,2,2,1,2,1,1,1,0,0,0], 
+    [0,1,0,1,2,2,2,1,2,1,1,1,2,2,2,1,0,0,0], 
+    [0,1,0,1,1,1,2,1,0,0,0,1,1,1,2,1,0,0,0], 
+    [0,0,0,1,2,2,2,1,1,1,0,1,2,2,2,1,0,0,0], 
+    [2,1,2,1,2,1,1,1,0,0,0,1,2,1,1,1,0,0,0], 
+    [2,1,2,1,2,2,2,1,0,1,1,1,2,2,2,1,0,0,0], 
+    [2,1,2,1,1,1,2,1,0,0,0,1,1,1,2,1,3,3,3], 
+    [2,2,2,2,2,2,2,1,1,1,2,2,2,2,2,1,0,4,0]  
 ];
 
 function initGame() {
@@ -241,7 +241,7 @@ function initGame() {
     }
     obstaclePositions.sort(() => Math.random() - 0.5);
     
-    if (obstaclePositions.length >= 8) {
+    if (obstaclePositions.length >= 11) {
         itemsGrid[obstaclePositions[0].r][obstaclePositions[0].c] = P_SPEED;
         itemsGrid[obstaclePositions[1].r][obstaclePositions[1].c] = P_SPEED;
         itemsGrid[obstaclePositions[2].r][obstaclePositions[2].c] = P_SPEED;
@@ -250,20 +250,34 @@ function initGame() {
         itemsGrid[obstaclePositions[5].r][obstaclePositions[5].c] = P_BOMB;
         itemsGrid[obstaclePositions[6].r][obstaclePositions[6].c] = P_FIRE;
         itemsGrid[obstaclePositions[7].r][obstaclePositions[7].c] = P_FIRE;
+         itemsGrid[obstaclePositions[8].r][obstaclePositions[8].c] = P_SPEED;
+        itemsGrid[obstaclePositions[9].r][obstaclePositions[9].c] = P_SPEED;
+        itemsGrid[obstaclePositions[10].r][obstaclePositions[10].c] = P_SPEED;
+        itemsGrid[obstaclePositions[11].r][obstaclePositions[11].c] = P_BOMB;
+        itemsGrid[obstaclePositions[12].r][obstaclePositions[12].c] = P_BOMB;
     }
 
     // 7. Reset Player/Boss
     player = { x: 3, y: 3, size: 23, renderSize: 54, speed: 7.2, maxBombs: 1, fireRange: 1, hasWon: false };
     enemies = [
-        { x: 17*TILE_SIZE+4, y: 0*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 1, dirY: 0, type: 'red' },
-        { x: 7*TILE_SIZE+4, y: 1*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 0, dirY: 1, type: 'red' },
-        { x: 13*TILE_SIZE+4, y: 2*TILE_SIZE+4, size: 22, speed: 1.2, dirX: -1, dirY: 0, type: 'red' },
-        { x: 0*TILE_SIZE+4, y: 6*TILE_SIZE+4, size: 22, speed: 1.5, dirX: 1, dirY: 0, type: 'purple' },
-        { x: 7*TILE_SIZE+4, y: 6*TILE_SIZE+4, size: 22, speed: -1.2, dirY: 0, type: 'purple' },
-        { x: 6*TILE_SIZE+4, y: 8*TILE_SIZE+4, size: 22, speed: 1.8, dirX: 1, dirY: 0, type: 'pink' },
-        { x: 16*TILE_SIZE+4, y: 10*TILE_SIZE+4, size: 22, speed: 1.8, dirX: 0, dirY: -1, type: 'pink' }
+                { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 1, dirY: 0, type: 'red' },
+        { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 1, dirY: 0, type: 'red' },
+        { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 1, dirY: 0, type: 'red' },
+        { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 1, dirY: 0, type: 'red' },
+        { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 1, dirY: 0, type: 'red' },
+        { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: 0, dirY: 1, type: 'red' },
+        { x: 16*TILE_SIZE+4, y: 9*TILE_SIZE+4, size: 22, speed: 1.2, dirX: -1, dirY: 0, type: 'red' },
+
+        { x: 0*TILE_SIZE+4, y: 6*TILE_SIZE+4, size: 100, speed: 1.5, hp: 3, maxHp: 3, dirX: 1, dirY: 0, type: 'purple' },
+      
+        { x: 4*TILE_SIZE+4, y: 5*TILE_SIZE+4, size: 22, speed: 2.5, dirX: 1, dirY: 0, type: 'pink' },
+        { x: 4*TILE_SIZE+4, y: 5*TILE_SIZE+4, size: 22, speed: 2.5, dirX: 1, dirY: 0, type: 'pink' },
+        { x: 4*TILE_SIZE+4, y: 5*TILE_SIZE+4, size: 22, speed: 2.5, dirX: 1, dirY: 0, type: 'pink' },
+                                { x: 4*TILE_SIZE+4, y: 5*TILE_SIZE+4, size: 22, speed: 2.5, dirX: 1, dirY: 0, type: 'pink' },
+                                        { x: 4*TILE_SIZE+4, y: 5*TILE_SIZE+4, size: 22, speed: 2.5, dirX: 1, dirY: 0, type: 'pink' },
+
     ];
-    boss = { x: 16*TILE_SIZE+2, y: 12*TILE_SIZE+2, size: 28, baseSpeed: 0.9, speed: 0.9, hp: 1, maxHp: 10, dirX: -1, dirY: 0, lastBombDropped: 0, bombCooldown: 3000, lastFlameShot: 0, flameCooldown: 5000, isEscaping: false, escapeTimer: 0 };
+    boss = { x: 16*TILE_SIZE+2, y: 9*TILE_SIZE+2, size: 38, baseSpeed: 1.9, speed: 1.9, hp: 10, maxHp: 10, dirX: -1, dirY: 0, lastBombDropped: 0, bombCooldown: 3000, lastFlameShot: 0, flameCooldown: 5000, isEscaping: false, escapeTimer: 0 };
 
     updateUiStats();
     setTimeout(resizeGameViewport, 50);
